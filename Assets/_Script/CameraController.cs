@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
         public Vector3 right;
         public Vector3 up;
     }
-    
+
 
     //TPS구현을 위한 카메라의 등뒤 위치 세팅.
     [Header("CameraOffset")]
@@ -29,6 +29,14 @@ public class CameraController : MonoBehaviour
     public float sensitivity = 20f;
     public float minPitch = -25f;
     public float maxPitch = 25f;
+
+    //카메라 벽뚫기 관련 충돌 제어
+    [Header("Camera Collision")] 
+    public LayerMask collisionMask; 
+    public float collisionRadius = 0.01f; 
+    public float collisionBuffer = 1f;
+    public float cameraLerpSpeed = 12f;
+
 
     //플레이어 좌,우 회전 변수
     float yaw;
@@ -43,8 +51,9 @@ public class CameraController : MonoBehaviour
 
         //플레이어 최초 Y값 세팅
         yaw = player.eulerAngles.y;
+        collisionMask = LayerMask.GetMask("Wall", "Ceiling");
     }
-    
+
     //카메라 흔들림 제어를 위해 update다음 실행되는 LateUpde 이용
     void LateUpdate()
     {
@@ -67,8 +76,24 @@ public class CameraController : MonoBehaviour
             Vector3.back * cameraBackDistance +
             Vector3.right * cameraShoulderOffset;
 
-        //카메라 최종 위치 세팅.
-        transform.position = player.position + cameraRotation * offset;
+        // 기본 위치 저장
+        Vector3 cameraNormalPos = player.position + cameraRotation * offset;
+
+        // ===== 충돌 체크용 기준 =====
+        Vector3 cameraPivot = player.position + Vector3.up * cameraHeight;
+        Vector3 cameraBackDir = cameraRotation * Vector3.back;
+
+        Vector3 finalPos = cameraNormalPos;                                   
+
+        // 카메라에 구형레이를 넣어 마스크와 충돌 체크
+        if (Physics.SphereCast(cameraPivot, collisionRadius, cameraBackDir, out RaycastHit hit,cameraBackDistance,collisionMask))
+        {
+            //벽, 천장에 닿았을 때만 함수 실행
+            finalPos = ResolveCameraCollision(cameraPivot, cameraBackDir, hit);
+        }
+
+        //최종 카메라 위치 조정
+        transform.position = Vector3.Lerp(transform.position,finalPos,Time.deltaTime * cameraLerpSpeed);
         transform.rotation = cameraRotation;
 
         //다른 스크립트로 보낼 변수 초기화.
@@ -81,5 +106,15 @@ public class CameraController : MonoBehaviour
             up = transform.up
         };
 
+    }
+     // 마스크 충돌시 시 Z축 보정 전용 함수
+    Vector3 ResolveCameraCollision(Vector3 cameraPivot, Vector3 cameraBackDir, RaycastHit hit)
+    {
+        float safeDist = Mathf.Max(hit.distance - collisionBuffer, 0.05f);
+
+        Vector3 correctedPos = cameraPivot + cameraBackDir * safeDist;
+        correctedPos.y = transform.position.y;
+
+        return correctedPos;
     }
 }

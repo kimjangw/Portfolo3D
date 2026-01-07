@@ -49,7 +49,7 @@ public class AimController : MonoBehaviour
     {
         if (cameraController == null) return;
 
-        float camPitch = cameraController.CurrentPitch;
+        float camPitch = cameraController.CurrentView.pitch;
 
         ApplyWristAim(camPitch);
         ApplyHeadAim(camPitch);
