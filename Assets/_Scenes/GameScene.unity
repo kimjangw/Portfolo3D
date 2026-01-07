@@ -218,7 +218,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 819437848}
+  - {fileID: 1326317715}
   - {fileID: 1205529394}
   - {fileID: 1465955257}
   m_Father: {fileID: 0}
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 197028836}
   - component: {fileID: 197028835}
   - component: {fileID: 197028834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TransitionRoadB_RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +918,7 @@ GameObject:
   - component: {fileID: 227550941}
   - component: {fileID: 227550940}
   - component: {fileID: 227550939}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TR_A_LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,6 +1177,38 @@ Transform:
   - {fileID: 1255476310}
   m_Father: {fileID: 786446957}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &286086519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 286086520}
+  m_Layer: 0
+  m_Name: GameSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &286086520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286086519}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1760196981}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &301468672 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -484444037552573092, guid: 780d340bd8578d54f80ca5409d087ef6, type: 3}
@@ -1199,7 +1231,7 @@ GameObject:
   - component: {fileID: 335162867}
   - component: {fileID: 335162866}
   - component: {fileID: 335162865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TransitionRoadA_BackWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1317,7 +1349,7 @@ GameObject:
   - component: {fileID: 429890268}
   - component: {fileID: 429890267}
   - component: {fileID: 429890266}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TR_A_RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1425,7 +1457,7 @@ GameObject:
   - component: {fileID: 430030607}
   - component: {fileID: 430030606}
   - component: {fileID: 430030605}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1548,7 +1580,7 @@ GameObject:
   - component: {fileID: 467077419}
   - component: {fileID: 467077418}
   - component: {fileID: 467077417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TransitionRoomA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1656,7 +1688,7 @@ GameObject:
   - component: {fileID: 475107814}
   - component: {fileID: 475107813}
   - component: {fileID: 475107812}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TR_B_RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1784,7 +1816,7 @@ GameObject:
   - component: {fileID: 527178252}
   - component: {fileID: 527178251}
   - component: {fileID: 527178250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TransitionRoadA_RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1972,7 +2004,7 @@ GameObject:
   - component: {fileID: 651005199}
   - component: {fileID: 651005198}
   - component: {fileID: 651005197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TR_B_LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2268,7 +2300,6 @@ GameObject:
   - component: {fileID: 819437847}
   - component: {fileID: 819437846}
   - component: {fileID: 819437849}
-  - component: {fileID: 819437850}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2343,12 +2374,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819437845}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1875, y: 1.125, z: -48.79}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 84458154}
+  m_Father: {fileID: 1326317715}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &819437849
 MonoBehaviour:
@@ -2394,25 +2425,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &819437850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819437845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4cf8244275a764f811f6deeb8523d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1205529394}
-  distance: 1.1
-  height: 1.12
-  shoulderOffset: 0.2
-  sensitivity: 20
-  minPitch: -25
-  maxPitch: 25
 --- !u!1 &822660767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,7 +2437,7 @@ GameObject:
   - component: {fileID: 822660770}
   - component: {fileID: 822660769}
   - component: {fileID: 822660768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TransitionRoadB_Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2558,7 +2570,7 @@ GameObject:
   - component: {fileID: 892401460}
   - component: {fileID: 892401459}
   - component: {fileID: 892401458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TransitionRoadA_Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2681,7 +2693,7 @@ GameObject:
   - component: {fileID: 957949428}
   - component: {fileID: 957949427}
   - component: {fileID: 957949426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TR_A_CenterWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2910,7 +2922,7 @@ GameObject:
   - component: {fileID: 982976039}
   - component: {fileID: 982976038}
   - component: {fileID: 982976037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: transitionRoomB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3018,7 +3030,7 @@ GameObject:
   - component: {fileID: 997676411}
   - component: {fileID: 997676410}
   - component: {fileID: 997676409}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NomalWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3126,7 +3138,7 @@ GameObject:
   - component: {fileID: 1056690060}
   - component: {fileID: 1056690059}
   - component: {fileID: 1056690058}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TransitionRoadB_LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3780,7 +3792,7 @@ GameObject:
   - component: {fileID: 1311936674}
   - component: {fileID: 1311936673}
   - component: {fileID: 1311936672}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3934,6 +3946,64 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!1 &1326317714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1326317715}
+  - component: {fileID: 1326317716}
+  m_Layer: 0
+  m_Name: CameraRig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1326317715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326317714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 819437848}
+  m_Father: {fileID: 84458154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1326317716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326317714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4cf8244275a764f811f6deeb8523d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1205529394}
+  cameraBackDistance: 1.1
+  cameraHeight: 1.12
+  cameraShoulderOffset: 0.2
+  sensitivity: 20
+  minPitch: -25
+  maxPitch: 25
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  collisionRadius: 0.01
+  collisionBuffer: 1
+  cameraLerpSpeed: 8
 --- !u!4 &1380963029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1008376805210107805, guid: 780d340bd8578d54f80ca5409d087ef6, type: 3}
@@ -4013,18 +4083,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a6ddf85fa93b246a5a2d701f45ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraController: {fileID: 819437850}
+  cameraController: {fileID: 0}
   flashlight: {fileID: 573343081}
   headAimTarget: {fileID: 218988720}
-  fastMouseThreshold: 600
   wristPitchMultiplier: 1
   wristMinPitch: -15
   wristMaxPitch: 25
   wristSmooth: 8
   headPitchMultiplier: 1
-  headMinPitch: -5
-  headMaxPitch: 5
   headSmooth: 6
+  headAimDistance: 1.5
 --- !u!4 &1475430831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6072082165678848284, guid: 780d340bd8578d54f80ca5409d087ef6, type: 3}
@@ -4119,8 +4187,8 @@ MonoBehaviour:
     m_MaintainOffset: 0
     m_ConstrainedAxes:
       x: 1
-      y: 1
-      z: 1
+      y: 0
+      z: 0
 --- !u!4 &1532603990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3742407835892290726, guid: 780d340bd8578d54f80ca5409d087ef6, type: 3}
@@ -4710,12 +4778,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760196978}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.073232, y: 0.3909092, z: -29.323368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 286086520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1761034113
 GameObject:
@@ -4729,7 +4797,7 @@ GameObject:
   - component: {fileID: 1761034117}
   - component: {fileID: 1761034116}
   - component: {fileID: 1761034115}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TR_B_CenterWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4837,7 +4905,7 @@ GameObject:
   - component: {fileID: 1792580411}
   - component: {fileID: 1792580410}
   - component: {fileID: 1792580409}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TransitionRoadA_LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4950,7 +5018,7 @@ GameObject:
   - component: {fileID: 1846426374}
   - component: {fileID: 1846426373}
   - component: {fileID: 1846426372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5073,7 +5141,7 @@ GameObject:
   - component: {fileID: 1919423722}
   - component: {fileID: 1919423721}
   - component: {fileID: 1919423720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TransitionRoadB_BackWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5354,4 +5422,4 @@ SceneRoots:
   - {fileID: 213037889}
   - {fileID: 1630604229}
   - {fileID: 794767021}
-  - {fileID: 1760196981}
+  - {fileID: 286086520}
