@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     public Transform player;
+    public float CurrentPitch => pitch;
 
     [Header("Offset")]
     public float distance = 1.1f;        // 뒤
