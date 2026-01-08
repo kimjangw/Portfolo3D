@@ -3,7 +3,22 @@ guid: eec5e7970026ce040ad534251777a603
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AngelBody
+    second: {fileID: 2100000, guid: 8e7df1f9d268c584e981660ab843177d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AngelFace
+    second: {fileID: 2100000, guid: db4d959ccb38860479936dc6fda3e6be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AngelWings
+    second: {fileID: 2100000, guid: 1f9195f51b0057d4d99f0adba34fa906, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
