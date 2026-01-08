@@ -85,11 +85,11 @@ public class CameraController : MonoBehaviour
 
         Vector3 finalPos = cameraNormalPos;                                   
 
-        // 카메라에 구형레이를 넣어 마스크와 충돌 체크
+        // 카메라에 구형레이를 넣어 마스크 목록에 있는 것과 충돌 체크
         if (Physics.SphereCast(cameraPivot, collisionRadius, cameraBackDir, out RaycastHit hit,cameraBackDistance,collisionMask))
         {
             //벽, 천장에 닿았을 때만 함수 실행
-            finalPos = ResolveCameraCollision(cameraPivot, cameraBackDir, hit);
+            finalPos = CorrectCameraPositionOnCollision(cameraPivot, cameraBackDir, hit);
         }
 
         //최종 카메라 위치 조정
@@ -108,11 +108,13 @@ public class CameraController : MonoBehaviour
 
     }
      // 마스크 충돌시 시 Z축 보정 전용 함수
-    Vector3 ResolveCameraCollision(Vector3 cameraPivot, Vector3 cameraBackDir, RaycastHit hit)
+    Vector3 CorrectCameraPositionOnCollision(Vector3 cameraPivot, Vector3 cameraBackDir, RaycastHit hit)
     {
         float safeDist = Mathf.Max(hit.distance - collisionBuffer, 0.05f);
 
+        //카메라 보정위치 계산
         Vector3 correctedPos = cameraPivot + cameraBackDir * safeDist;
+        //Y축은 고정(앞뒤로만)
         correctedPos.y = transform.position.y;
 
         return correctedPos;
