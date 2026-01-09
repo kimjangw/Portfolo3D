@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="isLeftShiftPressed">InputManager.IsSprint 사용하기</param>
     void PlayerMove(Vector2 input, bool isLeftShiftPressed)
     {
+        if (!cc.enabled) return; // 추가
+
         if (input.magnitude > 0.1f)
         {
             //이동 처리

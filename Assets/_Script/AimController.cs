@@ -11,7 +11,7 @@ public class AimController : MonoBehaviour
     //손전등 에임 세팅
     [Header("Light Aim")]
     public float lightPitchMultiplier = 1f;
-    public float lightMinPitch = -15f;
+    public float lightMinPitch = -25f;
     public float lightMaxPitch = 25f;
     public float lightSmooth = 8f;
 
