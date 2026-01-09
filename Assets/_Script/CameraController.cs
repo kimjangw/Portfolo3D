@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
         public Vector3 up;
     }
 
-
     //TPS구현을 위한 카메라의 등뒤 위치 세팅.
     [Header("CameraOffset")]
     public float cameraBackDistance = 1.1f;        // 뒤
@@ -31,17 +30,20 @@ public class CameraController : MonoBehaviour
     public float maxPitch = 25f;
 
     //카메라 벽뚫기 관련 충돌 제어
-    [Header("Camera Collision")] 
-    public LayerMask collisionMask; 
-    public float collisionRadius = 0.01f; 
+    [Header("Camera Collision")]
+    public LayerMask collisionMask;
+    public float collisionRadius = 0.01f;
     public float collisionBuffer = 1f;
     public float cameraLerpSpeed = 12f;
 
-
     //플레이어 좌,우 회전 변수
-    float yaw;
+    public float yaw;
     //카메라 위, 아래 각도 변수
     float pitch = 10f;
+
+    // 보간 임시 비활성 모드 플래그 추가
+    bool snapMode = false;
+
 
     void Start()
     {
@@ -57,6 +59,8 @@ public class CameraController : MonoBehaviour
     //카메라 흔들림 제어를 위해 update다음 실행되는 LateUpde 이용
     void LateUpdate()
     {
+       
+
         Vector2 mouse = Mouse.current.delta.ReadValue();
 
         // 마우스.X좌표 이동 → 캐릭터 Y축 회전
@@ -83,17 +87,21 @@ public class CameraController : MonoBehaviour
         Vector3 cameraPivot = player.position + Vector3.up * cameraHeight;
         Vector3 cameraBackDir = cameraRotation * Vector3.back;
 
-        Vector3 finalPos = cameraNormalPos;                                   
+        Vector3 finalPos = cameraNormalPos;
 
         // 카메라에 구형레이를 넣어 마스크 목록에 있는 것과 충돌 체크
-        if (Physics.SphereCast(cameraPivot, collisionRadius, cameraBackDir, out RaycastHit hit,cameraBackDistance,collisionMask))
+        if (Physics.SphereCast(cameraPivot, collisionRadius, cameraBackDir, out RaycastHit hit, cameraBackDistance, collisionMask))
         {
             //벽, 천장에 닿았을 때만 함수 실행
             finalPos = CorrectCameraPositionOnCollision(cameraPivot, cameraBackDir, hit);
         }
 
-        //최종 카메라 위치 조정
-        transform.position = Vector3.Lerp(transform.position,finalPos,Time.deltaTime * cameraLerpSpeed);
+        //최종 카메라 위치 조정 (여기만 수정)
+        if (snapMode)
+            transform.position = finalPos; // 즉시 스냅
+        else
+            transform.position = Vector3.Lerp(transform.position, finalPos, Time.deltaTime * cameraLerpSpeed); // 기존 보간
+
         transform.rotation = cameraRotation;
 
         //다른 스크립트로 보낼 변수 초기화.
@@ -107,7 +115,8 @@ public class CameraController : MonoBehaviour
         };
 
     }
-     // 마스크 충돌시 시 Z축 보정 전용 함수
+
+    // 마스크 충돌시 시 Z축 보정 전용 함수
     Vector3 CorrectCameraPositionOnCollision(Vector3 cameraPivot, Vector3 cameraBackDir, RaycastHit hit)
     {
         float safeDist = Mathf.Max(hit.distance - collisionBuffer, 0.05f);
@@ -119,4 +128,26 @@ public class CameraController : MonoBehaviour
 
         return correctedPos;
     }
+
+    //함수 수정 -> snapMode 처리 + yaw 직접 누적
+    public void SnapToPlayerInstant()
+    {
+        Quaternion rot = Quaternion.Euler(pitch, yaw, 0f);
+
+        Vector3 offset =
+            Vector3.up * cameraHeight +
+            Vector3.back * cameraBackDistance +
+            Vector3.right * cameraShoulderOffset;
+
+        transform.rotation = rot;
+        transform.position = player.position + rot * offset;
+        snapMode = true;
+    }
+
+    // snapMode 해제용 (Transition에서 호출)
+    public void ReleaseSnap()
+    {
+        snapMode = false;
+    }
+
 }
