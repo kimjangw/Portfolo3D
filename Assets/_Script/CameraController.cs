@@ -132,7 +132,7 @@ public class CameraController : MonoBehaviour
     //함수 수정 -> snapMode 처리 + yaw 직접 누적
     public void SnapToPlayerInstant()
     {
-        Quaternion rot = Quaternion.Euler(pitch, yaw, 0f);
+        Quaternion rot = Quaternion.Euler(pitch, yaw, 1f);
 
         Vector3 offset =
             Vector3.up * cameraHeight +
