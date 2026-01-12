@@ -59,26 +59,23 @@ public class CameraController : MonoBehaviour
     //카메라 흔들림 제어를 위해 update다음 실행되는 LateUpde 이용
     void LateUpdate()
     {
-       
-
+        //마우스의 현재 값 읽기
         Vector2 mouse = Mouse.current.delta.ReadValue();
 
-        // 마우스.X좌표 이동 → 캐릭터 Y축 회전
-        yaw += mouse.x * sensitivity * Time.deltaTime;
-        player.rotation = Quaternion.Euler(0f, yaw, 0f);
 
-        // 마우스.Y좌표 이동 → 카메라 Pitch(상하) 회전
+        //마우스 X좌표 이동 -> yaw제어(캐릭터 좌우 회전값)
+        yaw += mouse.x * sensitivity * Time.deltaTime;
+        //마우스 Y좌표이동 -> Pitch제어(캐릭터 상하 회전값)
         pitch -= mouse.y * sensitivity * Time.deltaTime;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
+        //마우스 좌우 회전값 적용
+        player.rotation = Quaternion.Euler(0f, yaw, 0f);
         // 카메라 각도 계산
         Quaternion cameraRotation = Quaternion.Euler(pitch, yaw, 0f);
 
         // 카메라 등뒤 위치 계산.
-        Vector3 offset =
-            Vector3.up * cameraHeight +
-            Vector3.back * cameraBackDistance +
-            Vector3.right * cameraShoulderOffset;
+        Vector3 offset = Vector3.up * cameraHeight + Vector3.back * cameraBackDistance + Vector3.right * cameraShoulderOffset;
 
         // 기본 위치 저장
         Vector3 cameraNormalPos = player.position + cameraRotation * offset;
@@ -96,15 +93,20 @@ public class CameraController : MonoBehaviour
             finalPos = CorrectCameraPositionOnCollision(cameraPivot, cameraBackDir, hit);
         }
 
-        //최종 카메라 위치 조정 (여기만 수정)
+        //스냅 여부 최종 카메라 위치 조정 
         if (snapMode)
-            transform.position = finalPos; // 즉시 스냅
+        {
+            //Transition을 통한 위치 이동시 위치 강제 이동
+            transform.position = finalPos;
+        }
         else
+        {   //기존 Lerp보간을 이용한 부드러운 카메라 연출.
             transform.position = Vector3.Lerp(transform.position, finalPos, Time.deltaTime * cameraLerpSpeed); // 기존 보간
+        }
 
         transform.rotation = cameraRotation;
 
-        //다른 스크립트로 보낼 변수 초기화.
+        //다른 스크립트로 보낼 변수 새로 초기화.
         CurrentView = new CameraView
         {
             pitch = pitch,
@@ -116,7 +118,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    // 마스크 충돌시 시 Z축 보정 전용 함수
+    // 마스크(벽,천장) 충돌시 시 Z축 보정 전용 함수
     Vector3 CorrectCameraPositionOnCollision(Vector3 cameraPivot, Vector3 cameraBackDir, RaycastHit hit)
     {
         float safeDist = Mathf.Max(hit.distance - collisionBuffer, 0.05f);
@@ -129,10 +131,12 @@ public class CameraController : MonoBehaviour
         return correctedPos;
     }
 
-    //함수 수정 -> snapMode 처리 + yaw 직접 누적
+    //전환부 이동시 카메라 보간 OFF하고 직접 초기화. (TransitionController.cs에서 호출)
     public void SnapToPlayerInstant()
     {
-        Quaternion rot = Quaternion.Euler(pitch, yaw, 1f);
+
+        yaw = player.eulerAngles.y;
+        Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
 
         Vector3 offset =
             Vector3.up * cameraHeight +
@@ -144,7 +148,7 @@ public class CameraController : MonoBehaviour
         snapMode = true;
     }
 
-    // snapMode 해제용 (Transition에서 호출)
+    // snapMode 해제용 (TransitionController.cs에서 호출)
     public void ReleaseSnap()
     {
         snapMode = false;
