@@ -1003,10 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f60e3c6f5459ba4f9e4f51d7ca55188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  A_locked: 0
-  B_locked: 0
-  startSide: 0
+  locked: 0
 --- !u!4 &240557895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8276081391987928223, guid: 780d340bd8578d54f80ca5409d087ef6, type: 3}
@@ -2325,9 +2322,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1205529394}
+  cc: {fileID: 1205529400}
   cameraController: {fileID: 1326317716}
   hub: {fileID: 1287768518}
-  portalSide: 1
+  linkedHub: {fileID: 234457841}
 --- !u!4 &758437164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2480231731423164795, guid: 780d340bd8578d54f80ca5409d087ef6, type: 3}
@@ -4334,10 +4332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f60e3c6f5459ba4f9e4f51d7ca55188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  A_locked: 0
-  B_locked: 0
-  startSide: 0
+  locked: 0
 --- !u!65 &1287768519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5626,9 +5621,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1205529394}
+  cc: {fileID: 1205529400}
   cameraController: {fileID: 1326317716}
   hub: {fileID: 234457841}
-  portalSide: 0
+  linkedHub: {fileID: 1287768518}
 --- !u!4 &1832561690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4484586303138264298, guid: 780d340bd8578d54f80ca5409d087ef6, type: 3}

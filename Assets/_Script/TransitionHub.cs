@@ -2,24 +2,14 @@ using UnityEngine;
 
 public class TransitionHub : MonoBehaviour
 {
-    public enum State { None, FromA, FromB }
-    public State currentState = State.None;
+    public bool locked;
 
-    public enum StartSide { A, B }
-    public StartSide startSide = StartSide.A;
-
-    void Start()
+    
+    void OnTriggerEnter(Collider other)
     {
-        currentState = State.None;
-    }
+        if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
+            return;
 
-    public void ResetState()
-    {
-        currentState = State.None;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        ResetState();
+        locked = false;
     }
 }

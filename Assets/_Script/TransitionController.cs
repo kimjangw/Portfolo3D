@@ -1,60 +1,45 @@
-using System.Collections;
 using UnityEngine;
 
 public class TransitionController : MonoBehaviour
 {
-    public Transform player;
-    public CameraController cameraController;
-    public TransitionHub hub;
+    [Header("References")]
+    public Transform player;                  // 전환부에 이용될 플레이어의 Transform
+    public CharacterController cc;            // 전환부에서 CC켜고 이동시 끼임 및 튀어나감 증상 제어를 위한 변수
+    public CameraController cameraController; //
 
-    public enum Side { A, B }
-    public Side portalSide;
+    [Header("Portal Hub")]
+    public TransitionHub hub;               // 자기쪽 Hub
+    public TransitionHub linkedHub;         // 반대쪽 Hub
 
-    bool isTransitioning = false;
-
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (isTransitioning) return;
-        if (hub.currentState != TransitionHub.State.None) return;
+        // player 체크
+        if (other.transform != player) return;
 
-        if (portalSide == Side.A)
-            hub.currentState = TransitionHub.State.FromA;
-        else
-            hub.currentState = TransitionHub.State.FromB;
+        // 이미 잠겨있으면 이동 금지
+        if (hub.locked) return;
 
-        DoTransition();
+        Teleport();
     }
 
-    void DoTransition()
+    void Teleport()
     {
-        isTransitioning = true;
+        // 이동시 중복이동 방지를 위해 양쪽 Lock
+        hub.locked = true;
+        linkedHub.locked = true;
 
-        // 1) 월드 기준 X/Z 미러링
+        // Player 겹침 및 튕김 방지(OFF)
+        cc.enabled = false;
+
+        // Z축 반전을 통한 캐릭터 좌표 이동
         Vector3 pos = player.position;
-        pos.x = -pos.x;
         pos.z = -pos.z;
         player.position = pos;
 
-        // 2) yaw 180 회전
-        float newYaw = cameraController.yaw + 180f;
-        cameraController.yaw = newYaw;
-        player.rotation = Quaternion.Euler(0f, newYaw, 0f);
+        // Player 겹침 및 튕김 방지(ON)
+        cc.enabled = true;
 
-        // 3) 카메라 스냅 (yaw는 건드리지 않음)
+        //카메라 재정렬
         cameraController.SnapToPlayerInstant();
-
-        // 4) 재트리거 방지용 offset
-        player.position -= player.forward * 0.1f;
-
-        StartCoroutine(ResetFlag());
-    }
-
-
-
-
-    IEnumerator ResetFlag()
-    {
-        yield return null;
-        isTransitioning = false;
     }
 }
